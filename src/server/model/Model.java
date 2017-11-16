@@ -64,6 +64,9 @@ public class Model {
     public void won(){
         this.score++;
     }
+    public void lost(){
+        this.score--;
+    }
     public void decrementGuess(){
         this.guessesLeft--;
     }

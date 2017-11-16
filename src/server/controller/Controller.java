@@ -42,13 +42,14 @@ public class Controller {
             if(inWord(guess.charAt(0))){
                 String wordSoFar = model.guessLetter(guess.charAt(0));
                 if(model.ifWon()){
-                    return "You win, " + wordSoFar + " is the correct word!";
+                    return "You win, " + wordSoFar + " is the correct word! Score: " + model.getScore();
                 }else{
                     return wordSoFar;
                 }
             }else{
                 model.decrementGuess();
                 if(model.ifLose()){
+                    model.lost();
                     return "Wrong! Out of guesses, you lose! Score: " + model.getScore();
                 }
                 else{
@@ -59,10 +60,14 @@ public class Controller {
         }else{
             if(model.getWord().equals(guess)){
                 model.won();
-                return "You win, " + guess + " is the correct word!";
+                return "You win, " + guess + " is the correct word! Score:" + model.getScore();
             }else{
                 model.decrementGuess();
-                return "Wrong, " + guess + " is not the correct word!";
+                if(model.ifLose()){
+                    model.lost();
+                    return "Wrong! Out of guesses, you lose! Score: " + model.getScore();
+                }
+                return "Wrong, " + guess + " is not the correct word! " + model.guessesLeft + " guesses left!";
             }
         }
     }

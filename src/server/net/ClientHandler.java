@@ -28,7 +28,6 @@ class ClientHandler implements Runnable {
     private BufferedWriter toCli;
     private BufferedReader fromCli;
     private Controller controller;
-    public boolean inGame = false;
     
     public ClientHandler(Socket clientSocket) {
         controller = new Controller();
@@ -49,15 +48,12 @@ class ClientHandler implements Runnable {
         
         try {
             boolean connected = true;
-            //boolean inGame = false;
+            boolean inGame = false;
             String request;
-            
+            sendResponse("To start a game, type: Start Game");
             while(connected){
-                
-                
-                
+                              
                 if(!inGame){
-                    sendResponse("To start a game, type: Start Game");
                     request = readRequest();
                     if(request.toLowerCase().equals("start game")){
                         controller.changeWord();
@@ -66,7 +62,14 @@ class ClientHandler implements Runnable {
                         continue;
                 }
                     else{
-                        sendResponse("");
+                        if(request.toLowerCase().equals("bye")){
+                            disconnect();
+                            connected = false;
+                        }else{
+                            sendResponse("To start a game, type: Start Game");
+                        }
+                        
+                        continue;
                     }
                 }
                 
@@ -74,9 +77,20 @@ class ClientHandler implements Runnable {
                 if(request.toLowerCase().equals("bye")){
                     disconnect();
                     connected = false;
-                }else if (request.toLowerCase().startsWith("guess ")){
+                }
+                
+                else if (request.toLowerCase().startsWith("guess ")){
                     String response = controller.guess(request.toUpperCase());
-                    sendResponse(response);
+                    if (response.contains("win") || response.contains("lose")){
+                        inGame = false;
+                        sendResponse(response + " To start a game, type: Start Game");
+                        continue;
+                    }
+                    else{
+                        sendResponse(response);
+                    }
+                }else{
+                    sendResponse("To guess, type: guess [word].");
                 }
             }
             

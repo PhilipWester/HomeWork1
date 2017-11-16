@@ -24,11 +24,8 @@ public class Controller {
         return model.getScore();
     }
     
-    public String changeWord(){
-        // TODO make the word random
-        String word = "RANDOMWORD";
-        model.changeWord(word);
-        return "Word changed to " + word + ".";
+    public void changeWord(){
+        model.changeWord();
     }
     // Testfunction
     public boolean inWord(char ch){

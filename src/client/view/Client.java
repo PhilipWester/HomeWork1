@@ -15,7 +15,6 @@ import java.net.UnknownHostException;
 public class Client {
   private static final int PORT = 8080;
   private static final String IPstring = "127.0.0.1";
-    //private static Thread cliController;
     /**
      * @param args the command line arguments
      * @throws java.net.UnknownHostException

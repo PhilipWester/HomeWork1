@@ -16,7 +16,6 @@ public class serverStart {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         startHandler server = new startHandler();
         server.run();
     }

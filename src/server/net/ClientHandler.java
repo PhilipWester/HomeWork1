@@ -21,7 +21,6 @@ import server.controller.Controller;
  */
 
 //  Handles one client
-// TODO: Create one model.
 // Every time a operation is done (change a word, make a guess. Make a controller that takes the model 
 class ClientHandler implements Runnable {
     private final Socket clientSocket;
@@ -38,10 +37,8 @@ class ClientHandler implements Runnable {
         } catch (IOException ex) {
             Logger.getLogger(ClientHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //  Hur ska jag göra userface responsive? Ska jag göra en ny thread av controller för varje request? Låter slösaktigt Kolla på hans video bara
         
     }
-    // TODO: Se till att clientHandler inte behöver hålla reda på "inGame". Bara controller och model håller reda på spelet.
 
     @Override
     public void run() {
@@ -83,7 +80,7 @@ class ClientHandler implements Runnable {
                 
                 else if (request.toLowerCase().startsWith("guess ")){
                     String response = controller.guess(request.toUpperCase());
-                    if (response.contains("win") || response.contains("lose")){
+                    if (response.contains("win") || response.contains("lose")){ //Everything is uppercase -> no risc of accidentally getting any other "win" or "lose"
                         inGame = false;
                         sendResponse(response + " To start a game, type: Start Game");
                         continue;

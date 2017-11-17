@@ -29,7 +29,6 @@ public class Model {
     
     public Model(){
         try {
-            // TODO: Take words ranodmly out of list
             fr = new FileReader(file);
             br = new BufferedReader(fr);
         } catch (FileNotFoundException ex) {

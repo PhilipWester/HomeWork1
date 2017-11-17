@@ -24,11 +24,16 @@ class clientOutput implements Runnable {
     @Override
     public void run(){
         Scanner scanner = new Scanner(System.in);
+        String message;
         while(true){
             try {
-                toServer.write(scanner.nextLine());
+                message = scanner.nextLine();
+                toServer.write(message);
                 toServer.newLine();
                 toServer.flush();
+                if(message.equals("exit")){
+                    break;
+                }
             } catch (IOException ex) {
                 Logger.getLogger(clientOutput.class.getName()).log(Level.SEVERE, null, ex);
             }

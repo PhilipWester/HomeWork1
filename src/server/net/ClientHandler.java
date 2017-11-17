@@ -62,7 +62,8 @@ class ClientHandler implements Runnable {
                         continue;
                 }
                     else{
-                        if(request.toLowerCase().equals("bye")){
+                        if(request.toLowerCase().equals("exit")){
+                            sendResponse("exit");
                             disconnect();
                             connected = false;
                         }else{
@@ -74,7 +75,8 @@ class ClientHandler implements Runnable {
                 }
                 
                 request = readRequest();
-                if(request.toLowerCase().equals("bye")){
+                if(request.toLowerCase().equals("exit")){
+                    sendResponse("exit");
                     disconnect();
                     connected = false;
                 }

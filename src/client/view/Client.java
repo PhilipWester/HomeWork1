@@ -25,5 +25,4 @@ public class Client {
         cliController cliController = new cliController(IP, PORT);
         cliController.run();
     }
-    //  TODO: Skapa en tråd som scannar och skickar ut commands och skapa en annan tråd som tar emot från servern   
 }

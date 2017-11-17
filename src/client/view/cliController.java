@@ -47,6 +47,8 @@ public class cliController {
                 try {
                     cliSocket.close();
                     connected = false;
+                    clientOutput = null;
+                    System.out.println("We have exited");
                 } catch (IOException ex) {
                     Logger.getLogger(cliController.class.getName()).log(Level.SEVERE, null, ex);
                 }
